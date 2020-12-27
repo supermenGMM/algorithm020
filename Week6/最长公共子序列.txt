@@ -1,0 +1,18 @@
+class Solution {
+       //最长公共子序列
+    public int longestCommonSubsequence(String text1, String text2) {
+        char[] chars1 = text1.toCharArray();
+        char[] chars2 = text2.toCharArray();
+        int[][] arr = new int[text2.length()+1][text1.length()+1];
+        for (int i = 0; i < chars2.length; i++) {
+            for (int j = 0; j < chars1.length; j++) {
+                if(chars2[i]==chars1[j]){
+                    arr[i+1][j+1] =  arr[i][j]+1;
+                }else {
+                    arr[i+1][j+1] = Math.max(arr[i][j+1], arr[i+1][j]);
+                }
+            }
+        }
+        return arr[text2.length()][text1.length()];
+    }
+}

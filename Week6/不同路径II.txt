@@ -1,0 +1,23 @@
+class Solution {
+     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        if (obstacleGrid.length == 0) {
+            return 0;
+        }
+        int rows = obstacleGrid[0].length;
+        int[] matrix = new int[rows];
+        matrix[0] = 1;
+        for (int[] ints : obstacleGrid) {
+            for (int j = 0; j < matrix.length; j++) {
+                if(ints[j]==1){
+                    matrix[j] = 0;
+                }else if(j>0){
+                    //这里等于上一行该列元素obstacleGrid[i-1][j]与本行前一个元素obstacleGrid[i[j-1]相加
+                    //当ints为第一行时，默认第0行为全是0 的元素。
+                    matrix[j] += matrix[j-1];
+                }
+            }
+        }
+
+        return matrix[rows-1];
+    }
+}
