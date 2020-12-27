@@ -1,0 +1,30 @@
+class Solution {
+   /**
+     * 三角形最小路径和
+     * @param triangle
+     */**
+     * 三角形最小路径和
+     * @param triangle
+     * @return
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        /**
+         * 解法
+         * a.分治: pro(i,j) = min(pro(i+1,j+1),pro(i+1,j)) + triangle[i][j];
+         * b.状态数组定义: minPath[i][j] = triangle;
+         * c.DP方程
+         *   f(i,j) = min(f(i+1,j+1)+f(i+1,j))+triangle[i][j];
+         *
+         */
+      
+        for (int i = triangle.size() - 2; i >= 0; i--) {
+            List<Integer> col = triangle.get(i);
+            for (int j = 0; j <  col.size(); j++) {
+                int a = triangle.get(i+1).get(j);
+                int b = triangle.get(i+1).get(j+1);
+                col.set(j,Math.min(a,b)+col.get(j));
+            }
+        }
+        return triangle.get(0).get(0);
+    }
+}
